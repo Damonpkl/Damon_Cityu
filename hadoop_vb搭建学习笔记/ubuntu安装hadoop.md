@@ -137,6 +137,8 @@ Connection to localhost closed.
 
 在网上下载了1.8版本，可以使用xftp或者filezilla上传到虚拟机，或者直接网上下载到虚拟机
 
+找不到的话，可以发邮箱给我1027625442@qq.com
+
 我放的目录在Downloads里
 
 ![image-20211028072723021](ubuntu安装hadoop.assets/image-20211028072723021.png)
