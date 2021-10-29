@@ -1,5 +1,7 @@
 # ubuntu安装hadoop
 
+author:Damon
+
 ### 安装前的 网络设置
 
 ![image-20211028042441802](ubuntu安装hadoop.assets/image-20211028042441802.png)
@@ -41,9 +43,16 @@ Adding user hadoop to group sudo
 Done.
 ```
 
+电脑关机，进入hadoop
+
 更新和安装插件
 
 ```shell
+hadoop@damonpkl-VirtualBox:~/.ssh$ sudo apt install net-tools
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following NEW packages will be installed:
 #更新apt
 hadoop@damonpkl-VirtualBox:~$ sudo apt-get update
 [sudo] password for hadoop: 
@@ -137,9 +146,11 @@ Connection to localhost closed.
 
 在网上下载了1.8版本，可以使用xftp或者filezilla上传到虚拟机，或者直接网上下载到虚拟机
 
-找不到的话，可以发邮箱给我1027625442@qq.com
-
 我放的目录在Downloads里
+
+192.168.50.40 
+
+
 
 ![image-20211028072723021](ubuntu安装hadoop.assets/image-20211028072723021.png)
 
@@ -364,6 +375,8 @@ hadoop@damonpkl-VirtualBox:/usr/local/hadoop$ jps
 2327 DataNode
 2648 Jps
 
+#关掉文件
+./sbin/stop-dfs.sh
 ```
 
 #### 配置文件说明
