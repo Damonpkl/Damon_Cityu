@@ -1,0 +1,181 @@
+-- 条件查询练习
+-- 查询工资大于 1200 的员工姓名和工资 
+select ename ,sal from emp where sal>1200;
+
+-- 查询员工号为 7499 的员工的姓名和部门号和年薪
+select ename ,deptno,sal*12 年薪 from emp where empno =7499;
+
+-- 选择工资不在 1500 到 3000 的员工的姓名和工资 
+select ename ,sal from emp where sal between 1500 and 3000;
+
+-- 选择在 10 或 20 号部门工作的员工姓名和部门号 （知识点：in）
+select ename , deptno from emp where deptno in (10,20);
+
+-- 选择公司中没有管理者的员工姓名及岗位（ job）
+select ename ,job,mgr from emp where mgr is null ;
+
+-- 选择公司中有佣金的员工姓名，工资和佣金
+select ename ,sal ,comm from emp where comm >0;
+
+-- 选择员工姓名的第三个字母是 a 的员工姓名
+select ename from emp where ename like "__a%" ;
+
+-- 选择姓名中同时有字母 a 和 e 的员工姓名 
+select ename from emp where ename like "%a%e%"or "%e%a%" ;
+  
+-- 显示出表 emp 表中 ename 以 'e' 结尾的员工信息 
+select ename from emp where ename like "%e";
+
+-- 显示出表 emp 部门编号在 20-30 之间的姓名、职位 （知识点：between ... and ...）
+select ename ,job,deptno from emp where deptno between 20 and 30;
+
+-- 显示出表 emp 的 mgr 是 7566,7698,7839 的员工姓名、职位 （知识点：in）
+select ename ,job,mgr from emp where mgr in(7566,7698,7839);
+
+-- 排序查询练习
+-- 查询员工的姓名和部门号和年薪，按年薪降序按姓名升序 
+select ename ,sal*12 年薪 from emp order by 年薪 ;
+
+-- 选择工资不在 1500 到 3000 的员工的姓名和工资，按工资降序 （知识点：not between ... and ...）
+select ename,sal from emp where sal not between 1500 and 3000 order by sal desc;
+
+-- 查询员工姓名中包含 e 的员工信息，并先按姓名的字节数降序，再按部门号升序 
+select * from emp where ename like '%e%' order by length(ename) desc , deptno asc;
+
+-- 常用函数
+-- 1.显示系统时间(注：日期+时间) 
+select now();
+
+-- 2.查询员工号，姓名，工资, 佣金，以及佣金提高百分之 20%后与工资的和（别名：提升后收入） 
+select empno ,ename,sal ,comm,comm*1.2+sal 提升后收入  from emp;
+
+-- 3.将员工的姓名按"首字母"排序，并写出姓名的长度（别名：length）（知识点：substr）
+select ename ,length(ename) length from emp order by substr(ename,1);
+
+-- 4.做一个查询，产生下面的结果
+-- <ename> earns <sal> monthly but wants <sal*3>
+select concat(ename," earns ",sal,' monthly but wants ',sal*3) DreamSalary from emp;
+
+-- 使用 case-when，按照下面的条件
+select ename ,job ,
+case 
+    when job='PRESIDENT' then 'A'
+    when job='ANALYST' then 'B'
+    when job='MANAGER' then 'C'
+    when job='SALESMAN' then 'D'
+    when job='CLERK' then 'E'
+end Grade
+from emp;
+
+-- 分组函数
+-- 查询公司员工工资的最大值，最小值，平均值，总和 
+select max(sal)最大值,min(sal)最小值,avg(sal)平均值,sum(sal)总和 from emp;
+
+-- 查询员工表中的最大入职时间和最小入职时间的相差天数 （别名：DIFFRENCE）
+select datediff(max(hiredate),min(hiredate)) from emp;
+
+-- 查询部门编号为 30 的员工个数 
+select count(empno =30) from emp;
+
+
+-- 1.查询各个岗位名称（ job） 及对应员工人数 
+select job,count(ename) 员工人数  from emp group by job;
+
+-- 2查询各岗位的员工工资的最大值，最小值，平均值，总和，并按岗位名称（job） 升序排列
+select job,max(sal),min(sal),avg(sal),sum(sal) from emp group by job;
+
+-- 3查询所有部门的编号，员工数量和工资平均值,并按平均工资降序排列 
+select deptno ,count(ename),avg(sal) from emp group by deptno order by avg(sal) desc;
+
+-- 4.列出至少有5个员工的所有部门编码
+select deptno ,count(ename) from emp group by deptno having count(ename)>=5 ; 
+
+-- 5.列出最低薪金大于1500的各种工作及从事此工作的全部雇员人数.
+select job ,count(ename) ,min(sal) from emp group by job having min(sal)>1500 ;
+
+-- 6.列出各个部门经理的（job为MANAGER)的最低薪金
+select deptno,job ,min(sal) from emp where job='manager' group by deptno ;
+
+-- 7.查询管理者及其所管理的员工的最低工资（别名：最低工资），只显示最低工资不低于1200的记录，没有管理者的员工不计算在内 。
+select mgr ,min(sal) 最低工资 from emp group by mgr  having min(sal)>=1200 and mgr is not null;
+
+-- 1.显示所有员工的姓名，部门号和部门名称。
+select e.ename , e.deptno ,dt.dname from emp  e left join dept dt on e.deptno = dt.deptno;
+
+-- 2.查询 30 号部门员工的岗位名称（job) 和 30 号部门的工作地点（loc）
+select  distinct e.job  , e.deptno,dt.loc  from emp e left join dept dt on e.deptno = dt.deptno where e.deptno = 30;
+
+-- 3.列出部门名称和这些部门的员工信息,同时列出那些没有员工的部门.  （考察外连接）
+select dt.deptno ,dt.dname , e.ename from emp e right join dept dt on e.deptno =dt.deptno;
+
+-- 4.列出员工领导的薪水超过3000的员工姓名与领导姓名
+select e.ename'员工',e.mgr'员工领导的编号',a.ename'领导',a.empno '领导编号',a.sal'领导的工资'  from emp e  join emp a on e.mgr=a.empno where a.sal>=3000 order by a.sal desc; 
+
+-- 5.列出每个薪水等级有多少员工    （考察非等值连接）
+select s.grade,count(e.ename)  from emp e left join salgrade s on e.sal between s.losal and s.hisal group by s.grade ;
+
+-- 6.列出所有员工及领导的姓名和薪金  （考察自连接）
+select e.ename'员工名字' ,e.sal'员工薪水',a.ename'领导名字',a.sal'领导薪水' from emp e join emp a on e.mgr = a.empno ;
+
+-- 7.列出所有部门的详细信息和人数 （考察外连接）
+select distinct d.deptno,d.dname,d.loc ,count(ename)'员工人数' from dept d left join emp e on d.deptno =e.deptno group by d.deptno;
+
+-- 8.列出受雇日期早于其直接上级的所有员工的编号,姓名,部门名称
+select e.empno'员工编号' ,e.ename'员工名称',e.hiredate'员工受雇日期',d.dname'部门名称',a.ename '主管',a.hiredate'主管受雇日期' from emp e join emp a join dept d on e.mgr=a.empno and e.deptno =d.deptno where e.hiredate<a.hiredate; 
+
+-- 9.列出在每个部门工作的员工数量,平均工资和平均服务期限 'ACCOUNTING', '3', '2916.666667', '20210987409286.6667'
+select d.dname ,count(e.ename),avg(e.sal),avg(now()-e.hiredate)  from dept d left join emp e on d.deptno = e.deptno group by d.deptno;
+
+-- 1.列出薪金比"SMITH"多的所有员工信息.
+select sal from emp where ename='SMITH';
+select * from emp where sal>(select sal from emp where ename='SMITH') order by sal;
+
+-- 2.列出在部门"SALES"<销售部>工作的员工的姓名,假定不知道销售部的部门编号.
+select deptno from dept where dname ='SALES' ; 
+select e.ename from emp as e where e.deptno=(select d.deptno from dept as d where dname ='SALES');
+
+-- 3.查询每个部门中的最高薪水的人员名称 c,M
+select max(sal) from emp group by deptno ;
+select ename ,deptno , sal from emp where sal in (select max(sal) from emp group by deptno ) ;
+
+-- 4.查询哪些人的薪水在部门的平均薪水之上
+select avg(sal),deptno from emp group by deptno;
+select e.ename ,e.sal,a.av,e.deptno,a.dt from emp  e join (select avg(sal) av,deptno dt from emp group by deptno) a on e.deptno= a.dt where sal>av  ;
+
+-- 5.查询各部门（所有人的）平均薪水的等级
+select avg(sal) from emp group by deptno;
+select s.grade,e.deptno from salgrade s join (select avg(sal) av,deptno from emp group by deptno) e where e.av between s.losal and s.hisal;
+
+-- 6.取得平均薪水最高的部门的部门编号。
+select avg(sal) from emp group by deptno;
+select deptno ,avg(sal) av from emp group by deptno having av >= all(select avg(sal)  from emp group by deptno);#用max函数出现问题
+
+-- 7.求平均薪水的等级最低的部门的部门名称。
+select deptno ,avg(sal) av from emp group by deptno having av <= all(select avg(sal)  from emp group by deptno);
+
+-- 8.列出与"SCOTT"从事相同工作的所有员工及部门名称
+select job ,deptno from emp where ename='SCOTT';
+select ename ,deptno,job from emp where job=(select job  from emp where ename="SCOTT");
+
+-- 9.列出所有"CLERK"(办事员)的姓名及其部门名称,部门的人数
+select ename,deptno from emp where job='CLERK';
+select count(deptno) num,deptno from emp group by deptno;
+select e.ename,d.dname,s.num,e.job from emp e join dept d join (select count(deptno) num,deptno from emp group by deptno) s on e.deptno=d.deptno and s.deptno=e.deptno where e.ename in (select ename from emp where job='CLERK');
+
+-- 10.列出薪金高于在部门30工作的所有员工的薪金的员工姓名和薪金.部门名称
+select sal from emp where deptno=30;
+select ename,sal ,deptno from emp where sal >all(select sal from emp where deptno=30);
+
+
+-- 11.列出各种工作的最低工资及从事此工作的雇员姓名
+select ename,min(sal),job from emp group by job;
+
+
+-- 12.列出薪金高于公司平均薪金的所有员工,所在部门,上级领导(姓名),雇员的工资等级
+select avg(sal) from emp ;#2073.214286
+select e.ename,d.dname,a.ename,s.grade,e.sal from emp e join dept d join salgrade s join emp a on e.deptno =d.deptno and e.sal between s.losal and s.hisal and e.mgr=a.empno where e.sal>(select avg(sal) from emp ); 
+select ename ,sal from emp where sal>2073.214286;
+
+-- 13.取得比普通员工(员工代码没有在mgr字段上出现的)的最高薪水还要高的领导人姓名和薪金
+select sal from emp where mgr is null;
+select distinct a.ename 领导名字,a.sal 领导工资 from emp e  join emp a on  e.mgr=a.empno where a.sal>=(select sal from emp where mgr is null); 
