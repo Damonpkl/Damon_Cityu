@@ -1,0 +1,35 @@
+参考文献
+[1]Alam, M. Oracle NoSQL数据库：实时大数据管理[M].越瑾，译.北京：清华大学出版社，2015.
+[2]Anderson J C，Lehnardt J .Slater N. CouchDB： the definitive guide[M]. Sebastopol：O’Reilly Media. Inc.，2010.
+[3]Banker K. MongoDB in actionfMJ. New York： Manning Publications Co. ,2011.
+[4]Benjamin B,Jenny K. Data Analytics with HadoopQMj. Sebastopol: O'Reilly Media.Inc. ,2016.
+[5]Borthakur D,Gray J.Sarma J S,et aL Apache Hadoop goes realtime at Facebook[Cl. Proceedings of the 2011 ACM SIGMOD International Conference on Management of data. ACM.2011: 1071-1080.
+[6]Dean J,Ghemawat S. MapReduce： simplified data processing on large clustersfj]. Communications of the ACM,2008,51(1)： 107-113.
+[7]Fasale A,Kumar N. YARN Essentials^MJ. Birmingham： Packt Publishing,2015.
+[8]Ghemawat S，Gobioff H, Leung S T. The Google file system[C]. ACM SIGOPS operating systems review. ACM,2003,37(5) ： 29-43.
+[9]Hewitt E. Cassandra： the definitive guide[M]. Sebastopol： O’Reilly Media,Inc. ,2010.
+[10]Holmes A. Hadoop in practice[M]. New York: Manning Publications Co. ,2012.
+[11]Junqueira F.Reed B. ZooKeepcr： distributed process coordination[Mj. Sebastopol: O'Reilly Media. Inc. ,2013.
+[12]Karau H * Konwinski A. Wendell P, et al. Learning spark： lightning-fast big data analysis [M].
+Sebastopol: O'Reilly Media,Inc. ,2015.
+[13]Lam C. Hadoop in action[M], New York： Manning publications Co. ,2010.
+[14]Macedo T，Oliveira F. Redis cookbook[M]. Sebastopol: O'Reilly Media,Inc. ,2011.
+[15]Marz N, Warren J. Big Data： Principles and best practices o£ scalable realtime data systems[M]. New York： Manning Publications Co. ,2015.
+[16]McCreary D,Kelly A. Making sense of NoSQL[j]. Shelter Island: Manning,2014： 19-20,
+[17]Ryza S,Laserson U,Owen S,et al. Advanced analytics with spark： patterns for learning from data at Scale[M]. Sebastopol： O'Reilly Media,Inc. ,2015.
+[18]Sadalage P J,Fowler M. NoSQL distilled： a brief guide to the emerging world of polyglot persistence [M]. New York： Pearson Education,2012.
+[19]Tiwari S. Professional NoSQL[M], Hoboken： John Wiley & Sons,2011.
+[20]Vaish G. Getting started with NoSQL[M]. Birmingham： Packt Publishing Ltd.2013.
+[21]Venner J. Pro hadoop[M]. New York： Apress,2009.
+[22]White T. Hadoop： The definitive guide[M]. 4th ed. Sebastopol： O'Reilly Media,Inc. ,2015.
+[23]White T. Hadoop权威指南[M].周敏奇，王晓玲，金澈清，等译.北京：清华大学出版社,2011.
+[24]Zaharia M. An architecture for fast and general data processing on large clusters[M]. Williston： Morgan & Claypool,2016.
+[25]朝乐门.数据科学[M].北京：清华大学出版社，2016.
+[26]董西成,Hadoop技术内幕：深入解析YARN架构设计与实现原理[M].北京：机械工业出版社，2013.
+[27]陆嘉恒，文继荣.分布式系统及云计算概论[M].北京：清华大学出版社,2011.
+[28]陆嘉恒.Hadoop实战[M].北京：机械工业出版社,2011.
+[29]陆嘉恒.大数据挑战与NoSQL数据库技术[M].北京：电子工业出版社,2013.
+[30]Sadalage PJ,Fowler M. NoSQL精粹[M].爱飞翔，译.北京：机械工业出版社，2013.
+[31]申德荣，于戈，王习特，等.支持大数据管理的NoSQL系统研究综述口丄软件学报，2013,08： 1786-1803.
+[32]王珊，萨师煩.数据库系统概论M.5版.北京：高等教育出版社，2014.
+[33]佐佐木达也.NoSQL数据库入门[M].罗勇，译.北京：人民邮电出版社，2012.

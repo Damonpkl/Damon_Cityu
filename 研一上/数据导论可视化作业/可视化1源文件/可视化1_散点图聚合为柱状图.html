@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html style="height: 100%">
+	<head>
+		<meta charset="utf-8">
+	</head>
+	<body style="height: 100%; margin: 0">
+		<div id="container" style="height: 100%"></div>
+
+		<script type="text/javascript" src="echarts.min.js"></script>
+		<script type="text/javascript">
+			var dom = document.getElementById("container");
+			var myChart = echarts.init(dom);
+			var app = {};
+
+			var option;
+
+
+
+			// prettier-ignore
+			const ForeignData = [
+				[2003, 1],
+				[2004, 0],
+				[2005, 0],
+				[2006, 0],
+				[2007, 0],
+				[2008, 1],
+				[2009, 1],
+				[2010, 3],
+				[2011, 5],
+				[2012, 2],
+				[2013, 2],
+				[2014, 1],
+				[2015, 6],
+				[2016, 2]
+			];
+			// prettier-ignore
+			const ChineseData = [
+				[2003, 0],
+				[2004, 0],
+				[2005, 0],
+				[2006, 0],
+				[2007, 0],
+				[2008, 0],
+				[2009, 0],
+				[2010, 0],
+				[2011, 2],
+				[2012, 1],
+				[2013, 4],
+				[2014, 1],
+				[2015, 0],
+				[2016, 1]
+			];
+
+			function calculateSum(data, dim) {
+				let total = 0;
+				for (var i = 0; i < data.length; i++) {
+					total += data[i][dim];
+				}
+				return total;
+			}
+			const scatterOption = (option = {
+				xAxis: {
+					scale: true
+				},
+				legend: {
+					data: ['CHINA', 'FOREIGN'],
+					left: 10
+				},
+				yAxis: {
+					scale: true
+				},
+				title: {
+					text: 'Relationship between papers and years',
+					subtext: 'author:Damon',
+					left: 'center'
+				},
+				tooltip: {},
+
+				series: [{
+
+						type: 'scatter',
+						name: 'FOREIGN',
+						dataGroupId: 'ForeignData',
+						universalTransition: {
+							enabled: true,
+							delay: function(idx, count) {
+								return Math.random() * 400;
+							}
+						},
+						data: ForeignData
+					},
+					{
+						type: 'scatter',
+						name: 'CHINA',
+						dataGroupId: 'ChineseData',
+						universalTransition: {
+							enabled: true,
+							delay: function(idx, count) {
+								return Math.random() * 400;
+							}
+						},
+						data: ChineseData
+					}
+				]
+			});
+			const barOption = {
+				xAxis: {
+					type: 'category',
+					data: ['FOREIGN', 'CHINA']
+				},
+				yAxis: {},
+				title: {
+					text: 'Relationship between papers and years',
+					subtext: 'author:Damon',
+					left: 'center'
+				},
+				tooltip: {},
+				series: [{
+					type: 'bar',
+					id: 'total',
+
+					data: [{
+							value: calculateSum(ChineseData, 1),
+							groupId: 'CHINA',
+							itemStyle: {
+								normal: {
+									color: '#50b7c1'
+								}
+							}
+						},
+						{
+							value: calculateSum(ForeignData, 1),
+							groupId: 'FOREIGN',
+							itemStyle: {
+								normal: {
+									color: '#3c3645'
+								}
+							}
+						}
+					],
+					universalTransition: {
+						enabled: true,
+						seriesKey: ['FOREIGN', 'CHINA'],
+						delay: function(idx, count) {
+							return Math.random() * 400;
+						}
+					}
+				}]
+			};
+			let currentOption = scatterOption;
+			setInterval(function() {
+				currentOption = currentOption === scatterOption ? barOption : scatterOption;
+				myChart.setOption(currentOption, true);
+			}, 4000);
+
+
+
+			if (option && typeof option === 'object') {
+				myChart.setOption(option);
+			}
+		</script>
+	</body>
+</html>
+
